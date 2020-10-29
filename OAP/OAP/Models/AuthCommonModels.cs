@@ -24,6 +24,9 @@
     public class Roles
     {
         public string Name { get; set; }
+        public string PreferredUsername { get; set; }
+        public string UserType { get; set; }
+        public string Dept { get; set; }
         public string AdminDept { get; set; }
     }
 }

@@ -40,7 +40,10 @@ namespace OAP.Controllers
                 NotBefore = DateTime.Now,
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("adpt", roles.AdminDept.ToString())
+                    new Claim("adpt", roles.AdminDept.ToString()),
+                    new Claim("uty", roles.UserType.ToString()),
+                    new Claim("dpt", roles.Dept.ToString()),
+                    new Claim("preferred_username",roles.PreferredUsername.ToString())
                 }),
                 SigningCredentials = creds
             };
@@ -76,7 +79,10 @@ namespace OAP.Controllers
                         IDataRecord record = (IDataReader)reader;
                         roles = new Roles()
                         {
-                            AdminDept = record[5].ToString()
+                            AdminDept = record[5].ToString(),
+                            Dept = record[3].ToString(),
+                            UserType = record[4].ToString(),
+                            PreferredUsername = record[2].ToString()
                         };
                     }
                     authReturn.IDToken = GenerateToken(roles);
